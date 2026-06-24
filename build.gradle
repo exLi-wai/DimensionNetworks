@@ -110,7 +110,7 @@ sourceSets {
                 property('mod_id', mod_id)
                 property('mod_name', mod_name)
                 property('mod_version', mod_version)
-                property('package', "${root_package}.${mod_id}")
+                property('package', mod_package)
             }
             resources {
                 property('mod_id', mod_id)

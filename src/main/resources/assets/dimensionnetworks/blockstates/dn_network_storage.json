@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "dimensionnetworks:dn_network_storage"
+    }
+  }
+}
