@@ -2,3 +2,4 @@ tile.dimensionnetworks.dn_network_storage.name=Dimensional Storage Access Nodes
 item.dimensionnetworks.ultimate_battery.name=Ultimate Battery
 message.dimensionnetworks.network_storage=DN Network Storage: %s / %s
 message.dimensionnetworks.network_key=Network: %s
+item.DnUltimateBattery.Tooltips=§7 Fill It Up To Complete Minecraft

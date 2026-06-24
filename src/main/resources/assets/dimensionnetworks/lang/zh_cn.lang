@@ -2,3 +2,4 @@ tile.dimensionnetworks.dn_network_storage.name=次元存储访问节点
 item.dimensionnetworks.ultimate_battery.name=终极电池
 message.dimensionnetworks.network_storage=次元网络存储：%s / %s
 message.dimensionnetworks.network_key=网络：%s
+item.DnUltimateBattery.Tooltips=§7填满就能通关Minecraft

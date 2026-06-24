@@ -7,9 +7,12 @@ import com.lw.DimensionNetworks.Tags;
 import com.lw.DimensionNetworks.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.util.EnergyFormat;
 
+import jakarta.annotation.sql.DataSourceDefinition;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -33,6 +36,7 @@ public class ItemUltimateBattery extends ItemDnEnergyBase {
 
     @Override
     public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        tooltip.add(EnergyFormat.formatFe(getStored(stack)) + " / " + EnergyFormat.formatCapacityFe(getCapacity(stack)));
+        tooltip.add(EnergyFormat.formatFe(getStored(stack)) + " / " + EnergyFormat.formatFe(getCapacity(stack)));
+        tooltip.add(I18n.format("item.DnUltimateBattery.Tooltips"));
     }
 }
