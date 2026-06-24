@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.lw.DimensionNetworks.capability.DnEnergyStorage;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
@@ -13,7 +15,7 @@ import net.minecraft.world.storage.WorldSavedData;
 public class DnVirtualEnergyWorldData extends WorldSavedData {
 
     private static final String DATA_NAME = "dimensionnetworks_virtual_energy";
-    private static final BigInteger DEFAULT_CAPACITY = new BigInteger("1000000000000000000000000000000");
+    private static final BigInteger DEFAULT_CAPACITY = DnEnergyStorage.DEFAULT_LIMIT;
     private static final BigInteger DEFAULT_TRANSFER_LIMIT = BigInteger.valueOf(Long.MAX_VALUE);
 
     private final Map<String, DnVirtualEnergyNetwork> networks = new HashMap<String, DnVirtualEnergyNetwork>();

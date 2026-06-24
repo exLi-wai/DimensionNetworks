@@ -35,7 +35,8 @@ public abstract class ItemDnEnergyBase extends Item {
 
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull final ItemStack stack, NBTTagCompound nbt) {
-        DnEnergyStorage storage = new DnEnergyStorage(getCapacity(stack), getCapacity(stack), getCapacity(stack)) {
+        BigInteger capacity = getCapacity(stack);
+        DnEnergyStorage storage = new DnEnergyStorage(capacity, capacity, capacity) {
             @Override
             protected void onContentsChanged() {
                 setStored(stack, getEnergyStoredBig());

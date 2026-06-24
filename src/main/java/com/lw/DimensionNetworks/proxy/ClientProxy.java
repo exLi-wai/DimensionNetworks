@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.Objects;
+
 @EventBusSubscriber(modid = Tags.MOD_ID, value = Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
@@ -20,6 +22,6 @@ public class ClientProxy extends CommonProxy {
     }
 
     private static void registerItemModel(Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
     }
 }

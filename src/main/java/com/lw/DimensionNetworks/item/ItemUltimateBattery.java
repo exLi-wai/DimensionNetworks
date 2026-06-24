@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import com.lw.DimensionNetworks.Tags;
+import com.lw.DimensionNetworks.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.util.EnergyFormat;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -16,7 +17,7 @@ import javax.annotation.Nonnull;
 public class ItemUltimateBattery extends ItemDnEnergyBase {
 
     public static final String NAME = "ultimate_battery";
-    private static final BigInteger CAPACITY = new BigInteger(String.valueOf(Long.MAX_VALUE));
+    private static final BigInteger CAPACITY = DnEnergyStorage.DEFAULT_LIMIT;
 
     public ItemUltimateBattery() {
         setRegistryName(Tags.MOD_ID, NAME);
@@ -32,6 +33,6 @@ public class ItemUltimateBattery extends ItemDnEnergyBase {
 
     @Override
     public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
-        tooltip.add(EnergyFormat.formatFe(getStored(stack)) + " / " + EnergyFormat.formatFe(getCapacity(stack)));
+        tooltip.add(EnergyFormat.formatFe(getStored(stack)) + " / " + EnergyFormat.formatCapacityFe(getCapacity(stack)));
     }
 }

@@ -1,2 +1,4 @@
-tile.dimensionnetworks.dn_network_storage.name=DN Network Storage
+tile.dimensionnetworks.dn_network_storage.name=Dimensional Storage Access Nodes
 item.dimensionnetworks.ultimate_battery.name=Ultimate Battery
+message.dimensionnetworks.network_storage=DN Network Storage: %s / %s
+message.dimensionnetworks.network_key=Network: %s

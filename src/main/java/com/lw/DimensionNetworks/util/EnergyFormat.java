@@ -11,6 +11,7 @@ public final class EnergyFormat {
     private static final BigInteger MILLION = BigInteger.valueOf(1000000L);
     private static final BigInteger BILLION = BigInteger.valueOf(1000000000L);
     private static final BigInteger TRILLION = BigInteger.valueOf(1000000000000L);
+    private static final BigInteger LONG_MAX = BigInteger.valueOf(Long.MAX_VALUE);
 
     private static final DecimalFormat WHOLE = new DecimalFormat("#,##0");
     private static final DecimalFormat TWO_DECIMAL = new DecimalFormat("0.##");
@@ -20,6 +21,10 @@ public final class EnergyFormat {
 
     public static String formatFe(BigInteger value) {
         return format(value, "FE");
+    }
+
+    public static String formatCapacityFe(BigInteger value) {
+        return value != null && value.compareTo(LONG_MAX) >= 0 ? "\u221E FE" : formatFe(value);
     }
 
     public static String format(BigInteger value, String unit) {

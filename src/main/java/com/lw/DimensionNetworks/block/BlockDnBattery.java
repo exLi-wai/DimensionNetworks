@@ -16,7 +16,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -72,9 +72,9 @@ public class BlockDnBattery extends Block implements ITileEntityProvider {
             TileEntity tile = worldIn.getTileEntity(pos);
             if (tile instanceof TileDnBattery battery) {
                 String energy = EnergyFormat.formatFe(battery.getDnStorage().getEnergyStoredBig());
-                String capacity = EnergyFormat.formatFe(battery.getDnStorage().getMaxEnergyStoredBig());
-                playerIn.sendMessage(new TextComponentString("DN Network Storage: " + energy + " / " + capacity));
-                playerIn.sendMessage(new TextComponentString("Network: " + battery.getNetworkKey()));
+                String capacity = EnergyFormat.formatCapacityFe(battery.getDnStorage().getMaxEnergyStoredBig());
+                playerIn.sendMessage(new TextComponentTranslation("message.dimensionnetworks.network_storage", energy, capacity));
+                playerIn.sendMessage(new TextComponentTranslation("message.dimensionnetworks.network_key", battery.getNetworkKey()));
             }
         }
         return true;
