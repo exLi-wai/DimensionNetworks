@@ -5,7 +5,7 @@ import com.lw.DimensionNetworks.block.BlockDnBattery;
 import com.lw.DimensionNetworks.capability.DnCapabilities;
 import com.lw.DimensionNetworks.compat.flux.DnFluxNetworksIntegration;
 import com.lw.DimensionNetworks.item.ItemBlockDnBattery;
-import com.lw.DimensionNetworks.item.ItemDnBattery;
+import com.lw.DimensionNetworks.item.ItemUltimateBattery;
 import com.lw.DimensionNetworks.tile.TileDnBattery;
 
 import net.minecraft.block.Block;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy implements IProxy {
 
     public static final BlockDnBattery DN_BATTERY_BLOCK = new BlockDnBattery();
-    public static final ItemDnBattery DN_BATTERY_ITEM = new ItemDnBattery();
+    public static final ItemUltimateBattery ULTIMATE_BATTERY_ITEM = new ItemUltimateBattery();
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
@@ -53,6 +53,6 @@ public class CommonProxy implements IProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlockDnBattery(DN_BATTERY_BLOCK));
-        event.getRegistry().register(DN_BATTERY_ITEM);
+        event.getRegistry().register(ULTIMATE_BATTERY_ITEM);
     }
 }

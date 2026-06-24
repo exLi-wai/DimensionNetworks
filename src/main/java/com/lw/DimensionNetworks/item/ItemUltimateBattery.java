@@ -13,12 +13,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ItemDnBattery extends ItemDnEnergyBase {
+public class ItemUltimateBattery extends ItemDnEnergyBase {
 
-    public static final String NAME = "dn_battery_item";
-    private static final BigInteger CAPACITY = new BigInteger("1000000000000000000");
+    public static final String NAME = "ultimate_battery";
+    private static final BigInteger CAPACITY = new BigInteger(String.valueOf(Long.MAX_VALUE));
 
-    public ItemDnBattery() {
+    public ItemUltimateBattery() {
         setRegistryName(Tags.MOD_ID, NAME);
         setTranslationKey(Tags.MOD_ID + "." + NAME);
         setMaxStackSize(1);
