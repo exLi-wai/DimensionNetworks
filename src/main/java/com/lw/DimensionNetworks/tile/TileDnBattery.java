@@ -6,18 +6,21 @@ import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
 import com.lw.DimensionNetworks.capability.DnCapabilities;
 import com.lw.DimensionNetworks.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.capability.FeEnergyAdapter;
+import com.lw.DimensionNetworks.compat.flux.DnFluxNetworksIntegration;
 import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyNetwork;
 import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyWorldData;
 import com.lw.DimensionNetworks.network.energy.DnVirtualNetworkKeys;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class TileDnBattery extends TileEntity {
+public class TileDnBattery extends TileEntity implements ITickable {
 
     private final IDnEnergyStorage networkStorage = new NetworkStorageProxy();
     private final IEnergyStorage feAdapter = new FeEnergyAdapter(networkStorage);
@@ -48,8 +51,78 @@ public class TileDnBattery extends TileEntity {
     }
 
     @Override
+    public void update() {
+        if (world == null || world.isRemote || networkStorage.isEmpty()) {
+            return;
+        }
+        outputEnergyToAdjacentTiles();
+    }
+
+    private void outputEnergyToAdjacentTiles() {
+        long remaining = networkStorage.getExtractLimitLong();
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            if (remaining <= 0L || networkStorage.isEmpty()) {
+                return;
+            }
+            remaining -= pushEnergy(facing, remaining);
+        }
+    }
+
+    private long pushEnergy(EnumFacing facing, long maxAmount) {
+        TileEntity target = world.getTileEntity(pos.offset(facing));
+        if (target == null || target.isInvalid()) {
+            return 0L;
+        }
+
+        long pushedToFlux = pushEnergyToFluxPlug(target, facing, maxAmount);
+        return pushedToFlux > 0L ? pushedToFlux : pushEnergyToForgeReceiver(target, facing, maxAmount);
+    }
+
+    private long pushEnergyToFluxPlug(TileEntity target, EnumFacing facing, long maxAmount) {
+        if (!Loader.isModLoaded("fluxnetworks")) {
+            return 0L;
+        }
+        return DnFluxNetworksIntegration.pushToFluxPlug(this, target, facing, maxAmount);
+    }
+
+    private long pushEnergyToForgeReceiver(TileEntity target, EnumFacing facing, long maxAmount) {
+        EnumFacing targetSide = facing.getOpposite();
+        if (!target.hasCapability(CapabilityEnergy.ENERGY, targetSide)) {
+            return 0L;
+        }
+
+        IEnergyStorage receiver = target.getCapability(CapabilityEnergy.ENERGY, targetSide);
+        if (receiver == null || !receiver.canReceive()) {
+            return 0L;
+        }
+
+        int request = receiver.receiveEnergy((int) Math.min(Integer.MAX_VALUE, maxAmount), true);
+        if (request <= 0) {
+            return 0L;
+        }
+
+        long extractable = networkStorage.extractEnergy(request, true);
+        if (extractable <= 0L) {
+            return 0L;
+        }
+
+        long extracted = networkStorage.extractEnergy(extractable, false);
+        if (extracted <= 0L) {
+            return 0L;
+        }
+
+        int inserted = receiver.receiveEnergy((int) Math.min(Integer.MAX_VALUE, extracted), false);
+        if (inserted < extracted) {
+            networkStorage.receiveEnergy(extracted - inserted, false);
+        }
+        return inserted;
+    }
+
+    @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        return capability == DnCapabilities.DN_ENERGY || capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
+        return capability == DnCapabilities.DN_ENERGY
+                || capability == CapabilityEnergy.ENERGY
+                || super.hasCapability(capability, facing);
     }
 
     @Override

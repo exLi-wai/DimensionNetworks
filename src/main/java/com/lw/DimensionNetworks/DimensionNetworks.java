@@ -12,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(
         modid = Tags.MOD_ID,
         name = Tags.MOD_NAME,
-        version = Tags.VERSION
+        version = Tags.VERSION,
+        dependencies = "after:fluxnetworks@[4.1.0,);"
 )
 public class DimensionNetworks {
 
