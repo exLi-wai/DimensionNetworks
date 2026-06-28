@@ -1,9 +1,9 @@
-package com.lw.DimensionNetworks.integration.flux;
+package com.lw.DimensionNetworks.common.integration.flux;
 
 import javax.annotation.Nonnull;
 
 import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
-import com.lw.DimensionNetworks.tile.TileDnBattery;
+import com.lw.DimensionNetworks.common.tile.TileDnBattery;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

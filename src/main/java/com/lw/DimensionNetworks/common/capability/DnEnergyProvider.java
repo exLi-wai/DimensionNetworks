@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.capability;
+package com.lw.DimensionNetworks.common.capability;
 
 import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
 

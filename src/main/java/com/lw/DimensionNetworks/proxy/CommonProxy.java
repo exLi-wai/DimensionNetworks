@@ -1,12 +1,12 @@
 package com.lw.DimensionNetworks.proxy;
 
 import com.lw.DimensionNetworks.Tags;
-import com.lw.DimensionNetworks.block.BlockDnBattery;
-import com.lw.DimensionNetworks.capability.DnCapabilities;
-import com.lw.DimensionNetworks.integration.flux.DnFluxNetworksIntegration;
-import com.lw.DimensionNetworks.item.ItemBlockDnBattery;
-import com.lw.DimensionNetworks.item.ItemUltimateBattery;
-import com.lw.DimensionNetworks.tile.TileDnBattery;
+import com.lw.DimensionNetworks.common.block.BlockDnBattery;
+import com.lw.DimensionNetworks.common.capability.DnCapabilities;
+import com.lw.DimensionNetworks.common.integration.flux.DnFluxNetworksIntegration;
+import com.lw.DimensionNetworks.common.item.ItemBlockDnBattery;
+import com.lw.DimensionNetworks.common.item.ItemUltimateBattery;
+import com.lw.DimensionNetworks.common.tile.TileDnBattery;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

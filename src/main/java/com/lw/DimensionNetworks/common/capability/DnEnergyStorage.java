@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.capability;
+package com.lw.DimensionNetworks.common.capability;
 
 import java.math.BigInteger;
 

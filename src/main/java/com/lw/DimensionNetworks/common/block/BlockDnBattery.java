@@ -1,9 +1,9 @@
-package com.lw.DimensionNetworks.block;
+package com.lw.DimensionNetworks.common.block;
 
 import com.lw.DimensionNetworks.Tags;
-import com.lw.DimensionNetworks.integration.ftbu.DnFtbTeamCompat;
-import com.lw.DimensionNetworks.network.energy.DnVirtualNetworkKeys;
-import com.lw.DimensionNetworks.tile.TileDnBattery;
+import com.lw.DimensionNetworks.common.integration.ftbu.DnFtbTeamCompat;
+import com.lw.DimensionNetworks.common.energy.DnVirtualNetworkKeys;
+import com.lw.DimensionNetworks.common.tile.TileDnBattery;
 import com.lw.DimensionNetworks.util.EnergyFormat;
 
 import net.minecraft.block.Block;

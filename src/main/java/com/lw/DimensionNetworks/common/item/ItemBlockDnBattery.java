@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.item;
+package com.lw.DimensionNetworks.common.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;

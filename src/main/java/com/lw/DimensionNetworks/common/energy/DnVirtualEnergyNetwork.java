@@ -1,8 +1,8 @@
-package com.lw.DimensionNetworks.network.energy;
+package com.lw.DimensionNetworks.common.energy;
 
 import java.math.BigInteger;
 
-import com.lw.DimensionNetworks.capability.DnEnergyStorage;
+import com.lw.DimensionNetworks.common.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.util.BigIntegerNbt;
 
 import net.minecraft.nbt.NBTTagCompound;

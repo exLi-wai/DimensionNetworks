@@ -2,7 +2,7 @@ package com.lw.DimensionNetworks.api.energy;
 
 import java.math.BigInteger;
 
-import com.lw.DimensionNetworks.capability.DnCapabilities;
+import com.lw.DimensionNetworks.common.capability.DnCapabilities;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

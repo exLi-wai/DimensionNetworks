@@ -1,15 +1,15 @@
-package com.lw.DimensionNetworks.tile;
+package com.lw.DimensionNetworks.common.tile;
 
 import java.math.BigInteger;
 
 import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
-import com.lw.DimensionNetworks.capability.DnCapabilities;
-import com.lw.DimensionNetworks.capability.DnEnergyStorage;
-import com.lw.DimensionNetworks.capability.FeEnergyAdapter;
-import com.lw.DimensionNetworks.integration.flux.DnFluxNetworksIntegration;
-import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyNetwork;
-import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyWorldData;
-import com.lw.DimensionNetworks.network.energy.DnVirtualNetworkKeys;
+import com.lw.DimensionNetworks.common.capability.DnCapabilities;
+import com.lw.DimensionNetworks.common.capability.DnEnergyStorage;
+import com.lw.DimensionNetworks.common.capability.FeEnergyAdapter;
+import com.lw.DimensionNetworks.common.integration.flux.DnFluxNetworksIntegration;
+import com.lw.DimensionNetworks.common.energy.DnVirtualEnergyNetwork;
+import com.lw.DimensionNetworks.common.energy.DnVirtualEnergyWorldData;
+import com.lw.DimensionNetworks.common.energy.DnVirtualNetworkKeys;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;

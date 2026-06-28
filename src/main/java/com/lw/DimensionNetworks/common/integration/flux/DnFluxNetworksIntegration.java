@@ -1,7 +1,7 @@
-package com.lw.DimensionNetworks.integration.flux;
+package com.lw.DimensionNetworks.common.integration.flux;
 
 import com.lw.DimensionNetworks.DimensionNetworks;
-import com.lw.DimensionNetworks.tile.TileDnBattery;
+import com.lw.DimensionNetworks.common.tile.TileDnBattery;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

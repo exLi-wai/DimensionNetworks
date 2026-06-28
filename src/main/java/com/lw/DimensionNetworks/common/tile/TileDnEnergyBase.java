@@ -1,9 +1,9 @@
-package com.lw.DimensionNetworks.tile;
+package com.lw.DimensionNetworks.common.tile;
 
 import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
-import com.lw.DimensionNetworks.capability.DnCapabilities;
-import com.lw.DimensionNetworks.capability.DnEnergyStorage;
-import com.lw.DimensionNetworks.capability.FeEnergyAdapter;
+import com.lw.DimensionNetworks.common.capability.DnCapabilities;
+import com.lw.DimensionNetworks.common.capability.DnEnergyStorage;
+import com.lw.DimensionNetworks.common.capability.FeEnergyAdapter;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

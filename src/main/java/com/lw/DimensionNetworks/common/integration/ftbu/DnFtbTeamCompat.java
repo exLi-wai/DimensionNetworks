@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.integration.ftbu;
+package com.lw.DimensionNetworks.common.integration.ftbu;
 
 import com.feed_the_beast.ftblib.lib.data.FTBLibAPI;
 import com.feed_the_beast.ftblib.lib.data.ForgePlayer;

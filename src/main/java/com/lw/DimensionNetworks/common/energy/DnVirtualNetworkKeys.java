@@ -1,6 +1,6 @@
-package com.lw.DimensionNetworks.network.energy;
+package com.lw.DimensionNetworks.common.energy;
 
-import com.lw.DimensionNetworks.integration.ftbu.DnFtbTeamCompat;
+import com.lw.DimensionNetworks.common.integration.ftbu.DnFtbTeamCompat;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.player.EntityPlayer;

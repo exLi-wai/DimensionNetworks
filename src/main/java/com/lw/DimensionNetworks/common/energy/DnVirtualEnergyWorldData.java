@@ -1,11 +1,11 @@
-package com.lw.DimensionNetworks.network.energy;
+package com.lw.DimensionNetworks.common.energy;
 
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.lw.DimensionNetworks.capability.DnEnergyStorage;
+import com.lw.DimensionNetworks.common.capability.DnEnergyStorage;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

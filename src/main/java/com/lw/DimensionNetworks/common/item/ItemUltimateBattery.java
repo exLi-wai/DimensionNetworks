@@ -1,10 +1,10 @@
-package com.lw.DimensionNetworks.item;
+package com.lw.DimensionNetworks.common.item;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import com.lw.DimensionNetworks.Tags;
-import com.lw.DimensionNetworks.capability.DnEnergyStorage;
+import com.lw.DimensionNetworks.common.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.util.EnergyFormat;
 
 import net.minecraft.client.resources.I18n;
