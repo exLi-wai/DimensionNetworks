@@ -1,13 +1,10 @@
 package com.lw.DimensionNetworks.block;
 
-import com.feed_the_beast.ftblib.lib.data.ForgePlayer;
-import com.feed_the_beast.ftblib.lib.data.ForgeTeam;
-import com.feed_the_beast.ftblib.lib.data.Universe;
 import com.lw.DimensionNetworks.Tags;
+import com.lw.DimensionNetworks.integration.ftbu.DnFtbTeamCompat;
 import com.lw.DimensionNetworks.network.energy.DnVirtualNetworkKeys;
 import com.lw.DimensionNetworks.tile.TileDnBattery;
 import com.lw.DimensionNetworks.util.EnergyFormat;
-import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -21,7 +18,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.creativetab.CreativeTabs;
@@ -91,46 +87,13 @@ public class BlockDnBattery extends Block implements ITileEntityProvider {
             return fallback;
         }
 
-        String teamName = getCurrentFtbTeamName(player);
-        return isBlank(teamName) ? fallback : teamName;
-    }
-
-    private static String getCurrentFtbTeamName(EntityPlayer player) {
-        GameProfile profile = player.getGameProfile();
-        if (profile == null) {
-            return null;
-        }
-
+        String teamName;
         try {
-            if (!Universe.loaded()) {
-                return null;
-            }
-
-            Universe universe = Universe.get();
-            ForgePlayer forgePlayer = universe == null ? null : universe.getPlayer(profile);
-            ForgeTeam team = forgePlayer == null ? null : forgePlayer.team;
-            return getTeamDisplayName(team);
-        } catch (RuntimeException ignored) {
-            return null;
+            teamName = DnFtbTeamCompat.getTeamDisplayName(player);
+        } catch (RuntimeException | LinkageError ignored) {
+            teamName = null;
         }
-    }
-
-    private static String getTeamDisplayName(ForgeTeam team) {
-        if (team == null) {
-            return null;
-        }
-
-        ITextComponent title = team.getTitle();
-        if (title != null && !isBlank(title.getUnformattedText())) {
-            return title.getUnformattedText();
-        }
-
-        String id = team.getId();
-        if (!isBlank(id)) {
-            return id;
-        }
-
-        return team.getUIDCode();
+        return isBlank(teamName) ? fallback : teamName;
     }
 
     private static boolean isBlank(String value) {
