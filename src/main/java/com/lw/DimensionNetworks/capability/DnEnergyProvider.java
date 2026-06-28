@@ -8,6 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jspecify.annotations.NonNull;
 
 public class DnEnergyProvider implements ICapabilitySerializable<NBTTagCompound> {
 
@@ -20,12 +21,12 @@ public class DnEnergyProvider implements ICapabilitySerializable<NBTTagCompound>
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(@NonNull Capability<?> capability, EnumFacing facing) {
         return capability == DnCapabilities.DN_ENERGY || capability == CapabilityEnergy.ENERGY;
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+    public <T> T getCapability(@NonNull Capability<T> capability, EnumFacing facing) {
         if (capability == DnCapabilities.DN_ENERGY) {
             return DnCapabilities.DN_ENERGY.cast(dnStorage);
         }

@@ -6,7 +6,7 @@ import com.lw.DimensionNetworks.api.energy.IDnEnergyStorage;
 import com.lw.DimensionNetworks.capability.DnCapabilities;
 import com.lw.DimensionNetworks.capability.DnEnergyStorage;
 import com.lw.DimensionNetworks.capability.FeEnergyAdapter;
-import com.lw.DimensionNetworks.compat.flux.DnFluxNetworksIntegration;
+import com.lw.DimensionNetworks.integration.flux.DnFluxNetworksIntegration;
 import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyNetwork;
 import com.lw.DimensionNetworks.network.energy.DnVirtualEnergyWorldData;
 import com.lw.DimensionNetworks.network.energy.DnVirtualNetworkKeys;

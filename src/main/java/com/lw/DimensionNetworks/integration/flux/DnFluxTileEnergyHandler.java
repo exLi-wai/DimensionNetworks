@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.compat.flux;
+package com.lw.DimensionNetworks.integration.flux;
 
 import javax.annotation.Nonnull;
 
@@ -7,6 +7,7 @@ import com.lw.DimensionNetworks.tile.TileDnBattery;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import org.jspecify.annotations.NonNull;
 import sonar.fluxnetworks.api.energy.ITileEnergyHandler;
 
 public class DnFluxTileEnergyHandler implements ITileEnergyHandler {
@@ -19,25 +20,25 @@ public class DnFluxTileEnergyHandler implements ITileEnergyHandler {
     }
 
     @Override
-    public boolean canAddEnergy(TileEntity tile, EnumFacing dir) {
+    public boolean canAddEnergy(@NonNull TileEntity tile, EnumFacing dir) {
         IDnEnergyStorage storage = getStorage(tile);
         return storage != null && storage.canReceive();
     }
 
     @Override
-    public boolean canRemoveEnergy(TileEntity tile, EnumFacing dir) {
+    public boolean canRemoveEnergy(@NonNull TileEntity tile, EnumFacing dir) {
         IDnEnergyStorage storage = getStorage(tile);
         return storage != null && storage.canExtract();
     }
 
     @Override
-    public long addEnergy(long add, TileEntity tile, EnumFacing dir, boolean simulate) {
+    public long addEnergy(long add, @NonNull TileEntity tile, EnumFacing dir, boolean simulate) {
         IDnEnergyStorage storage = getStorage(tile);
         return storage == null ? 0L : storage.receiveEnergy(Math.max(0L, add), simulate);
     }
 
     @Override
-    public long removeEnergy(long remove, TileEntity tile, EnumFacing dir) {
+    public long removeEnergy(long remove, @NonNull TileEntity tile, EnumFacing dir) {
         IDnEnergyStorage storage = getStorage(tile);
         return storage == null ? 0L : storage.extractEnergy(Math.max(0L, remove), false);
     }

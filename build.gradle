@@ -91,6 +91,11 @@ dependencies {
     if (use_asset_mover.toBoolean()) {
         implementation "com.cleanroommc:assetmover:${asset_mover_version}"
     }
+
+    compileOnly "curse.maven:flux-networks-248020:3178199"
+    compileOnly "curse.maven:FTBUtilities-237102:3157548"
+    compileOnly "curse.maven:FTBLibrary-237167:2985811"
+
     if (enable_junit_testing.toBoolean()) {
         testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

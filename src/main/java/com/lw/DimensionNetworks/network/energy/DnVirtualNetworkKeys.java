@@ -1,7 +1,9 @@
 package com.lw.DimensionNetworks.network.energy;
 
-import java.lang.reflect.Method;
-
+import com.feed_the_beast.ftblib.lib.data.FTBLibAPI;
+import com.feed_the_beast.ftblib.lib.data.ForgePlayer;
+import com.feed_the_beast.ftblib.lib.data.ForgeTeam;
+import com.feed_the_beast.ftblib.lib.data.Universe;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,11 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public final class DnVirtualNetworkKeys {
-
-    private static final String[] UNIVERSE_CLASSES = new String[] {
-            "com.feed_the_beast.ftblib.lib.data.Universe",
-            "com.feed_the_beast.ftblib.lib.data.FTBLibAPI"
-    };
 
     private DnVirtualNetworkKeys() {
     }
@@ -36,82 +33,39 @@ public final class DnVirtualNetworkKeys {
     }
 
     private static String findFtbTeamKey(World world, EntityPlayer player) {
-        for (String className : UNIVERSE_CLASSES) {
-            String key = tryUniverseClass(className, world, player);
-            if (key != null) {
-                return key;
-            }
-        }
-        return null;
-    }
-
-    private static String tryUniverseClass(String className, World world, EntityPlayer player) {
-        try {
-            Class<?> universeClass = Class.forName(className);
-            Object universe = invokeStaticNoArgs(universeClass, "get");
-            if (universe == null) {
-                universe = invokeStaticNoArgs(universeClass, "getUniverse");
-            }
-            if (universe == null) {
-                return null;
-            }
-
-            Object team = invokeTeamLookup(universe, player);
-            if (team == null) {
-                return null;
-            }
-            String id = firstStringResult(team, "getId", "getUID", "getUniqueID", "getName", "getTitle");
-            return id == null || id.isEmpty() ? "ftbu:" + team.toString() : "ftbu:" + id;
-        } catch (ReflectiveOperationException ignored) {
+        GameProfile profile = player.getGameProfile();
+        if (profile == null || profile.getId() == null) {
             return null;
+        }
+
+        try {
+            if (Universe.loaded()) {
+                Universe universe = Universe.get();
+                ForgePlayer forgePlayer = universe == null ? null : universe.getPlayer(profile);
+                ForgeTeam team = forgePlayer == null ? null : forgePlayer.team;
+                String key = teamKey(team);
+                if (key != null) {
+                    return key;
+                }
+            }
+
+            String teamId = FTBLibAPI.getTeam(profile.getId());
+            if (teamId != null && !teamId.isEmpty()) {
+                return "ftbu:" + teamId;
+            }
         } catch (RuntimeException ignored) {
-            return null;
-        }
-    }
-
-    private static Object invokeStaticNoArgs(Class<?> type, String methodName) throws ReflectiveOperationException {
-        try {
-            Method method = type.getMethod(methodName);
-            return method.invoke(null);
-        } catch (NoSuchMethodException ignored) {
-            return null;
-        }
-    }
-
-    private static Object invokeTeamLookup(Object universe, EntityPlayer player) throws ReflectiveOperationException {
-        for (String methodName : new String[] { "getTeam", "getPlayerTeam" }) {
-            for (Method method : universe.getClass().getMethods()) {
-                if (!method.getName().equals(methodName) || method.getParameterTypes().length != 1) {
-                    continue;
-                }
-                Class<?> parameter = method.getParameterTypes()[0];
-                Object argument = null;
-                if (parameter.isAssignableFrom(EntityPlayer.class)) {
-                    argument = player;
-                } else if (parameter.isAssignableFrom(GameProfile.class)) {
-                    argument = player.getGameProfile();
-                } else if (parameter == String.class) {
-                    argument = player.getName();
-                }
-                if (argument != null) {
-                    return method.invoke(universe, argument);
-                }
-            }
         }
         return null;
     }
 
-    private static String firstStringResult(Object target, String... methodNames) throws ReflectiveOperationException {
-        for (String methodName : methodNames) {
-            try {
-                Method method = target.getClass().getMethod(methodName);
-                Object result = method.invoke(target);
-                if (result != null) {
-                    return result.toString();
-                }
-            } catch (NoSuchMethodException ignored) {
-            }
+    private static String teamKey(ForgeTeam team) {
+        if (team == null) {
+            return null;
         }
-        return null;
+        String id = team.getId();
+        if (id == null || id.isEmpty()) {
+            id = team.getUIDCode();
+        }
+        return id == null || id.isEmpty() ? null : "ftbu:" + id;
     }
 }

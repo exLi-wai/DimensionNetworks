@@ -1,4 +1,4 @@
-package com.lw.DimensionNetworks.compat.flux;
+package com.lw.DimensionNetworks.integration.flux;
 
 import com.lw.DimensionNetworks.DimensionNetworks;
 import com.lw.DimensionNetworks.tile.TileDnBattery;
